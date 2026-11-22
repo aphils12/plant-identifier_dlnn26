@@ -7,7 +7,7 @@ Esta pasta fica fora do git: só este ficheiro é versionado.
 - Download (v2): <https://zenodo.org/records/10419064>
 - Estrutura esperada, segundo o repositório oficial:
 
-```
+```text
 plantnet300kv2/
 ├── images/
 │   ├── train/0000/ ... 0999/
@@ -29,8 +29,3 @@ O `images.zip` tem 41,8 GB, mas o Zenodo aceita downloads parciais (testado a 22
 1. Guardar as imagens no Google Drive, não no computador.
 2. Filtrar pelos `species_id` e órgãos definidos no README principal; aplicar o teto de treino com uma seed fixa.
 3. Registar aqui a data do download e a versão usada, para o relatório.
-Os dados não são versionados no git. Descarregar o dataset de:
-https://zenodo.org/records/10419064
-
-- `raw/`: ficheiros originais, tal como foram descarregados
-- `processed/`: imagens redimensionadas e divisões treino/validação/teste
