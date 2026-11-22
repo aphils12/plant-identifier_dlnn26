@@ -1,3 +1,33 @@
+# Dados: grandes demais para o git (só fica o README com as instruções)
+data/*
+!data/README.md
+
+# Modelos treinados e checkpoints
+models/
+checkpoints/
+*.keras
+*.h5
+*.weights.h5
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Ambientes virtuais
+.venv*
+venv/
+env/
+
+# Sistema e editores
+.DS_Store
+.vscode/
+.idea/
+
+# Credenciais (ex.: kaggle.json)
+kaggle.json
+.env
 # Python
 __pycache__/
 *.py[cod]
