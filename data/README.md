@@ -17,8 +17,15 @@ plantnet300kv2/
 └── species_metadata.csv        # espécie → nome científico, género, família, estado IUCN
 ```
 
-## Sugestão
+## Como descarregar só as 20 espécies
 
-1. Descarregar primeiro só os dois ficheiros de metadados e escolher o subconjunto de espécies.
-2. Guardar as imagens no Google Drive, não no computador (são vários GB).
+O `images.zip` tem 41,8 GB, mas o Zenodo aceita downloads parciais (testado a 22/11/2026). Por isso dá para ler o índice do zip remoto e extrair só as pastas `images/<split>/<species_id>/` das 20 espécies (~10 GB), por exemplo com a biblioteca `remotezip`. A extração ainda está por testar no Colab.
+
+- Metadados: `https://zenodo.org/api/records/10419064/files/plantnet300K_metadata.csv/content` e `.../species_metadata.csv/content`
+- Imagens: `https://zenodo.org/api/records/10419064/files/images.zip/content`
+
+## Regras
+
+1. Guardar as imagens no Google Drive, não no computador.
+2. Filtrar pelos `species_id` e órgãos definidos no README principal; aplicar o teto de treino com uma seed fixa.
 3. Registar aqui a data do download e a versão usada, para o relatório.
