@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Dados e modelos (pesados, não versionar)
+data/raw/*
+data/processed/*
+!data/**/.gitkeep
+models/*
+!models/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.keras
+*.zip
+*.rar
+
+# Logs de treino
+runs/
+wandb/
+lightning_logs/
+
+# SO / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Material da cadeira (não versionar)
+GUIAO_PROJETO_DL.md
