@@ -1,31 +1,55 @@
-# Dados
+# Data
 
-Esta pasta fica fora do git: só este ficheiro é versionado.
+The images are not in the repository. They are in the shared Google Drive folder `plantnet_dlnn26`.
 
 ## Pl@ntNet-300K
 
 - Download (v2): <https://zenodo.org/records/10419064>
-- Estrutura esperada, segundo o repositório oficial:
+- License: CC BY 4.0 (each image also has its own author and license in the metadata)
+
+## Our subset
+
+Downloaded on 23/11/2026 with `notebooks/00_download_data.ipynb`. It only downloads the folders of our 20 species from the Zenodo zip (41.8 GB in total), and keeps:
+
+- organs: flower, leaf, fruit, habit, bark
+- train: max 1000 images per species (seed 42)
+- val and test: all images of these species and organs (official split)
+
+| split | images |
+|---|---|
+| train | 19,885 |
+| val | 7,243 |
+| test | 7,250 |
+| total | 34,378 |
+
+Files in the Drive folder:
 
 ```text
-plantnet300kv2/
-├── images/
-│   ├── train/0000/ ... 0999/
-│   ├── val/0000/   ... 0999/
-│   └── test/0000/  ... 0999/
-├── plantnet300K_metadata.csv   # imagem → espécie, split, autor, licença, órgão
-└── species_metadata.csv        # espécie → nome científico, género, família, estado IUCN
+plantnet_dlnn26/
+├── plantnet20_v1.zip            # images/<split>/<species_id>/<PN_hash>.jpg (4.7 GB)
+├── selection.csv                # one row per image: species, organ, author, license, split, path
+├── plantnet300K_metadata.csv    # original metadata (all 306,087 images)
+├── species_metadata.csv         # original species list (1000 species)
+└── 00_download_data.ipynb
 ```
 
-## Como descarregar só as 20 espécies
+## How to use it
 
-O `images.zip` tem 41,8 GB, mas o Zenodo aceita downloads parciais (testado a 22/11/2026). Por isso dá para ler o índice do zip remoto e extrair só as pastas `images/<split>/<species_id>/` das 20 espécies (~10 GB), por exemplo com a biblioteca `remotezip`. A extração ainda está por testar no Colab.
+1. Add a shortcut to the shared folder in your Drive (right click > Organise > Add shortcut > My Drive).
+2. At the top of each notebook:
 
-- Metadados: `https://zenodo.org/api/records/10419064/files/plantnet300K_metadata.csv/content` e `.../species_metadata.csv/content`
-- Imagens: `https://zenodo.org/api/records/10419064/files/images.zip/content`
+```python
+from google.colab import drive
+drive.mount('/content/drive')
 
-## Regras
+!cp /content/drive/MyDrive/plantnet_dlnn26/plantnet20_v1.zip /content/
+!unzip -q -o /content/plantnet20_v1.zip -d /content/plantnet20
+```
 
-1. Guardar as imagens no Google Drive, não no computador.
-2. Filtrar pelos `species_id` e órgãos definidos no README principal; aplicar o teto de treino com uma seed fixa.
-3. Registar aqui a data do download e a versão usada, para o relatório.
+The images are read from `/content/plantnet20` (Colab disk), not directly from Drive, because Drive is very slow with many small files.
+
+There is no need to run `00_download_data.ipynb` again.
+
+## Split
+
+`data/selection.csv` (in the repo) is a copy of the list in Drive: one row per image with its split. All models use this same split. Experiment results go to `experiments.csv` in the Drive folder (see `src/experiments.py`).
