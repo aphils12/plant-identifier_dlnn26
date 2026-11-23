@@ -49,3 +49,7 @@ drive.mount('/content/drive')
 The images are read from `/content/plantnet20` (Colab disk), not directly from Drive, because Drive is very slow with many small files.
 
 There is no need to run `00_download_data.ipynb` again.
+
+## Split
+
+`data/selection.csv` (in the repo) is a copy of the list in Drive: one row per image with its split. All models use this same split. Experiment results go to `experiments.csv` in the Drive folder (see `src/experiments.py`).

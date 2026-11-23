@@ -1,6 +1,7 @@
 # Dados: grandes demais para o git (só fica o README com as instruções)
 data/*
 !data/README.md
+!data/selection.csv
 
 # Modelos treinados e checkpoints
 models/
